@@ -6,6 +6,7 @@ ARG TARGETOS
 ARG TARGETARCH
 
 WORKDIR /workspace
+COPY .git .git
 COPY . .
 
 RUN make -n prometheus-plex-exporter GOOS=${TARGETOS} GOARCH=${TARGETARCH} BINARY=./bin/prometheus-plex-exporter
