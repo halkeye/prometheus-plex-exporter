@@ -5,13 +5,15 @@ ARG BUILDPLATFORM
 ARG TARGETOS
 ARG TARGETARCH
 ARG GIT_BRANCH
+ENV GIT_BRANCH
 ARG GIT_REVISION
+ENV GIT_REVISION
 ARG VERSION
+ENV VERSION
 
 WORKDIR /workspace
 COPY . .
 
-RUN make -n prometheus-plex-exporter GOOS=${TARGETOS} GOARCH=${TARGETARCH} BINARY=./bin/prometheus-plex-exporter
 RUN make prometheus-plex-exporter GOOS=${TARGETOS} GOARCH=${TARGETARCH} BINARY=./bin/prometheus-plex-exporter
 
 FROM alpine:3.19 as certs
