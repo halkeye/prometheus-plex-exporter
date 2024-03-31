@@ -17,6 +17,7 @@ permissions:
   packages: write
 
 env:
+
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
@@ -29,6 +30,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - run: |
+          echo "GIT_REVISION=$(git rev-parse --short HEAD)" >> "$GITHUB_ENV"
+          echo "GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD)" >> "$GITHUB_ENV"
+          echo "VERSION=$(shell ./tools/image-tag | cut -d, -f 1)" >> "$GITHUB_ENV"
 
       - name: Login to GHCR
         uses: docker/login-action@v3
@@ -52,6 +60,10 @@ jobs:
         id: build-and-push
         uses: docker/build-push-action@v5
         with:
+          build-args: |
+            GIT_REVISION=${{ env.GIT_REVISION }}
+            GIT_BRANCH=${{ env.GIT_BRANCH }}
+            VERSION=${{ env.VERISON }
           platforms: linux/amd64,linux/arm64
           push: ${{ github.event_name != 'pull_request' }} # Don't push on PR
           tags: ${{ steps.meta.outputs.tags }}
