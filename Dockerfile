@@ -16,6 +16,7 @@ FROM alpine:3.19 as certs
 RUN apk --update add ca-certificates
 
 FROM --platform=${TARGETPLATFORM:-linux/amd64} scratch
+LABEL org.opencontainers.image.source="https://github.com/halkeye/prometheus-plex-exporter"
 WORKDIR /app/
 COPY --from=certs /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 COPY --from=builder /workspace/bin/prometheus-plex-exporter /prometheus-plex-exporter
