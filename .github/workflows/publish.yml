@@ -63,7 +63,7 @@ jobs:
           build-args: |
             GIT_REVISION=${{ env.GIT_REVISION }}
             GIT_BRANCH=${{ env.GIT_BRANCH }}
-            VERSION=${{ env.VERISON }
+            VERSION=${{ env.VERISON }}
           platforms: linux/amd64,linux/arm64
           push: ${{ github.event_name != 'pull_request' }} # Don't push on PR
           tags: ${{ steps.meta.outputs.tags }}
