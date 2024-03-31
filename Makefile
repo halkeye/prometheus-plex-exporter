@@ -11,6 +11,8 @@ GOPATH := $(shell go env GOPATH)
 
 GO_OPT= -mod vendor -ldflags "-X main.Branch=$(GIT_BRANCH) -X main.Revision=$(GIT_REVISION) -X main.Version=$(VERSION)"
 
+BINARY=./bin/$(GOOS)/prometheus-plex-exporter-$(GOARCH)
+
 ### Development
 
 .PHONY: run
@@ -21,7 +23,7 @@ run:
 
 .PHONY: prometheus-plex-exporter
 prometheus-plex-exporter:
-	CGO_ENABLED=0 go build $(GO_OPT) -o ./bin/$(GOOS)/prometheus-plex-exporter-$(GOARCH) ./cmd/prometheus-plex-exporter
+	CGO_ENABLED=0 go build $(GO_OPT) -o $(BINARY) ./cmd/prometheus-plex-exporter
 
 .PHONY: exe
 exe:
