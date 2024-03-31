@@ -16,7 +16,7 @@ type TimelineEntry struct {
 	Identifier    string `json:"identifier"`
 	ItemID        int64  `json:"itemID"`
 	MetadataState string `json:"metadataState"`
-	SectionID     int64  `json:"sectionID"`
+	SectionID     string `json:"sectionID"`
 	State         int64  `json:"state"`
 	Title         string `json:"title"`
 	Type          int64  `json:"type"`
