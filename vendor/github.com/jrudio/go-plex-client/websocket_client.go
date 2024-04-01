@@ -14,7 +14,7 @@ import (
 // TimelineEntry ...
 type TimelineEntry struct {
 	Identifier    string `json:"identifier"`
-	ItemID        int64  `json:"itemID"`
+	ItemID        int64  `json:"itemID,string"`
 	MetadataState string `json:"metadataState"`
 	SectionID     int64  `json:"sectionID,string"`
 	State         int64  `json:"state"`
